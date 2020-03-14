@@ -1,0 +1,14 @@
+- name: "initialise swarm"
+  docker_swarm:
+    state: present
+  register: swarm_info
+- debug:
+    msg: "{{ swarm_info['swarm_facts']['JoinTokens']['Worker'] }}"
+- set_fact:
+    swarm_join_token: "{{ swarm_info['swarm_facts']['JoinTokens']['Worker'] }}"
+- name: "pip dependencies"
+  pip:
+    name:
+    - jsondiff
+    - pyyaml
+

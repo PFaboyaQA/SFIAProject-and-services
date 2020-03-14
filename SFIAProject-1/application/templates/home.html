@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body_content %}
+	<h1>Customer information</h1>
+	{% if players %}
+		{% for player in players %}
+
+			<div>
+				<h2>Name: {{ player.first_name }} {{ player.last_name}}</h2>
+				<p>Email: {{ player.email }}</p>
+				<form action="/home/{{player.player_id}}">
+					<button type="submit">Edit</button>
+				</form>	
+			</div>
+		{% endfor %}
+	
+	{% else %}
+		<p>There are no players</P>
+	{% endif %}
+{% endblock %}

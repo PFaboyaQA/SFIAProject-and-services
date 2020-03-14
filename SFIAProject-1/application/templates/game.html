@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block body_content %}
+	 <h1>List Of Games</h1>
+        	{% if games %}
+                	{% for game in games %}
+                        	<div>
+					<table style="width:70%">
+						<tr>
+							<th>Name</th>
+							<th>Price (£)</th>
+							<th>Company</th>
+							<th>Main Platform</th>
+							<th>game Registration ID</th>
+						</tr>
+						<tr>	
+					
+							<td>{{ game.game_name }}</td>
+							<td>{{ game.Price }}</td>
+							<td>{{ game.company }}</td>
+							<td>{{ game.main_platform }}</td>
+							<td>{{ game.game_registration_id }}</td>
+						</tr>
+					</table>  
+                        	</div>
+			{% endfor %}
+        	{% else %}
+                	<p>There are no games</P>
+		{% endif %}
+	<br>
+	<h3>Add Game<h3>
+	<div class='form' action=''>
+		<form method='POST' action=''>
+			{{ form.hidden_tag() }}
+			{{ form.game_name.label }}
+			{{ form.game_name }}
+			<br>
+			{{ form.price.label }}
+			{{ form.price }}
+			<br>
+			{{ form.company.label }}
+			{{ form.company }}
+			<br>
+			{{ form.main_platform.label }}
+			{{ form.main_platform }}
+			<br>
+			{{ form.buyer_id.label }}
+			{{ form.buyer_id }}
+			<br>
+			{{ form.genre_id.label }}
+			{{ form.genre_id }}
+			<br>
+			{{ form.submit }}
+		</form>
+	</div>			
+{% endblock %}
+

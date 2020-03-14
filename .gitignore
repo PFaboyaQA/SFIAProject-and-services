@@ -1,0 +1,17 @@
+venv
+*vsdx
+**/__pycache__
+**/*.pyc
+.cache
+.ssh
+.profile
+.ansible
+.docker
+.local
+.python_history
+.viminfo
+.bash_logout
+.bash_history
+.vim
+.nano
+.bashrc

@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+        sfia:
+                image: 127.0.0.1:5050/my/myapp
+                build: ./SFIAProject-1
+                ports:
+                -   target: 5000
+                    published: 5000
+                environment:
+                        - DB_URI=${DB_URI}
+                        - SECRET_KEY=${SECRET_KEY} 
+        service2:
+                image: 127.0.0.1:5050/my/playergen
+                build: ./player_account_no_generator
+                environment:
+                         - DB_URI=${DB_URI}
+                         - SECRET_KEY=${SECRET_KEY}
+        service3:
+                image: 127.0.0.1:5050/my/gamegen
+                build: ./game_account_no_generator
+                environment:
+                         - DB_URI=${DB_URI}
+                         - SECRET_KEY=${SECRET_KEY}
+        service4:
+                image: 127.0.0.1:5050/my/catenate
+                build: ./catenating_service
+                environment: 
+                         - DB_URI=${DB_URI}
+                         - SECRET_KEY=${SECRET_KEY}

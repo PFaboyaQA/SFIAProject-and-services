@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body_content %}
+	<h1>List of Genres</h1>
+        {% if genres %}
+                {% for genre in genres %}
+
+                        <div>
+                                <h2>{{ genre.genre_name }}</h2>
+				<form action="/genre/{{genre.genre_id}}">
+					<button type="submit">Games</button>
+				</form>	
+                        </div>
+		{% endfor %}
+	{% else %}
+                <p>There are no genres</P>
+	{% endif %}
+	<br>
+	<h3>Add Genre<h3>	
+	<div class='form' action=''>
+		<form method='POST' action=''>
+			{{ form.hidden_tag() }}
+			{{ form.genre_name.label }}
+			{{ form.genre_name }}
+			<br>
+			{% if form.genre_name.errors %}
+				<div class-"error">
+					{% for error in form.genre_name.errors %}
+						<span>{{ errors }}</span>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<br>
+			{{ form.submit }}
+		</form>
+	</div>
+{% endblock %}

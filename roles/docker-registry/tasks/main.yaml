@@ -1,0 +1,15 @@
+- name: "python pip"
+  apt:
+    name: python-pip
+    state: latest
+    update_cache: true
+- name: "docker sdk"
+  pip:
+   name: docker
+- name: "docker registry container"
+  docker_container:
+    name: registry
+    image: registry
+    ports:
+    - "5050:5000"
+

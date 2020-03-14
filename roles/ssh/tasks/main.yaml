@@ -1,0 +1,6 @@
+- name: authorized key
+  authorized_key:
+    user: seunfab48
+    state: present
+    key: "{{ public_key }}"
+

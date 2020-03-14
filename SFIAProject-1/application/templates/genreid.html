@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+	<h2>Name: {{ genre.genre_name }}</h2>
+	<p>Games: </p>
+	{% for game in genre.genre %}
+		{{ game.game_name }} {{ game.game_registration_id }}
+		<br>
+	{% endfor %}
+
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+- name: install java & git
+  apt:
+    pkg:
+    - openjdk-8-jdk
+    - git
+    - python3-pip
+    state: latest
+- name: ansible
+  pip:
+    name: ansible
+    executable: pip3
+- name: keypair
+  openssh_keypair:
+    path: /home/jenkins/.ssh/ansible_id_rsa
+    owner: jenkins
+    group: jenkins
+    mode: 0600
+  register: key_pair
+- set_fact:
+    public_key: "{{ key_pair.public_key }}"
+- debug:
+    msg: "{{ public_key }}"
+- name: jenkins war
+  get_url:
+    url: https://updates.jenkins-ci.org/latest/jenkins.war
+    dest: /home/jenkins/jenkins.war
+  register: jenkins_war
+- name: jenkins service unit
+  copy:
+    src: jenkins.service
+    dest: /etc/systemd/system/jenkins.service
+  register: jenkins_service
+- name: jenkins groovy scripts
+  copy:
+    src: init.groovy.d
+    dest: /home/jenkins/
+  register: jenkins_scripts
+- name: jenkins plugins
+  copy:
+    src: jenkins_plugins.txt
+    dest: /home/jenkins/jenkins_plugins.txt
+  register: jenkins_plugins
+- name: jenkins restarted
+  systemd:
+    name: jenkins
+    state: restarted
+    daemon_reload: yes
+  when: jenkins_service.changed or jenkins_scripts.changed or jenkins_plugins.changed
+

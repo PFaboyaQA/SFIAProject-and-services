@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+	<h2>Name: {{ player.first_name }} {{ player.last_name}}</h2>
+	<p>Email: {{ player.email }}</p>
+	<p>Player Registration ID: {{ player.player_registration_id }} </p>
+	<form method='POST'>
+		{{form.hidden_tag() }}
+		{{ form.first_name.label }}
+		{{ form.first_name }}
+		{{ form.last_name.label }}
+		{{ form.last_name }}
+			
+		{{ form.email.label }}
+		{{ form.email }}
+
+		{{ form.submit }}
+	</form>
+	<p>Games: </p>
+	{% for game in player.games %}
+		{{ game.game_name }} {{ game.game_registration_id}}
+		<br>
+	{% endfor %}
+
+
+
+{% endblock %}
